@@ -27,7 +27,7 @@ A=Array(x);
 MField=Array(x);
 SField=Array(x);
 for (var i=0; i<x;i++){
-    A[i]=Array(y); 
+    A[i]=Array(y);
     MField[i]=Array(y);
     SField[i]=Array(y);
     for (var j =0;j<y;j++){
@@ -36,7 +36,7 @@ for (var i=0; i<x;i++){
         }
     }
 
-//расставляем mn мин 
+//расставляем mn мин
 for(i=0;i<mn;i++){
     var ax=Math.floor(Math.random()*x);
     var ay = Math.floor(Math.random()*y);
@@ -58,7 +58,7 @@ for ( i = 0;i<x;i++)
         A[i][j].className="squareB";
         //container.appendChild(A[i][j]);
         $("#container").append(A[i][j]);
-        
+
         // назначаем обработчики нажатия левой и правой кнопки мыши
         A[i][j].onclick=leftClick;
         A[i][j].oncontextmenu=rightClick;
@@ -82,7 +82,7 @@ level.onchange=function(){
         {   x=16;y=30;mn=99;
             initGame(16,30,99);
         }
-    
+
     }
 
 
@@ -99,7 +99,7 @@ function leftClick(event)
             if(SField[ax][ay]==0)
                 {
                     SField[ax][ay]=1;
-                    if (MField[ax][ay]==1) 
+                    if (MField[ax][ay]==1)
                         {cell.className="squareM";
                          gameOver=1;
                          tFinish=window.performance.now();
@@ -108,15 +108,15 @@ function leftClick(event)
                     else {cell.innerHTML=countMines(ax,ay);
                           cell.className="squareW";
                           oMines++;
-                          
+
                           tablo.innerHTML="Открыто: " + oMines + "         Помечено:  " + markedMines;
                           if ((oMines==x*y-mn)&&(markedMines==mn)){gameOver =1;
                                                tFinish=window.performance.now();
                                               $("#gameResult").html("Congratulations!!! You win!!!");
                                              }
                           if(countMines(ax,ay)==0) openAdj(ax,ay);
-                          
-                          
+
+
                          }
                 }
                 }
@@ -136,26 +136,28 @@ function rightClick(event)
             {
             if (SField[ax][ay]==0)
                 {
-                    cell.className="squareR"; 
+                    cell.className="squareR";
                     SField[ax][ay]=-1;
                     markedMines++;
-                }          
-            else 
-                {cell.className="squareB"; 
+                    tablo.innerHTML="Открыто: " + oMines + "         Помечено:  " + markedMines;
+                }
+            else
+                {cell.className="squareB";
                  SField[ax][ay]=0;
                  markedMines--;
-                }           
+                 tablo.innerHTML="Открыто: " + oMines + "         Помечено:  " + markedMines;
+                }
             }
         }
 }
-     
+
 function countMines(ax,ay)
 {
     var m=0;
     for (var i =-1;i<=1;i++){
         for (var j =-1;j<=1;j++){
             if((i!==0)||(j!==0)){
-                if((ax+i>=0)&&(ax+i<x)&&(ay+j>=0)&&(ay+j<y)) 
+                if((ax+i>=0)&&(ax+i<x)&&(ay+j>=0)&&(ay+j<y))
                     {m=m+MField[ax+i][ay+j];
                     }
             }
@@ -182,7 +184,7 @@ function openAdj(ax,ay){
                                              }
                        else if (m==0) {openAdj(ax+i,ay+j);}
                     }
-    
+
             }
 
         }
